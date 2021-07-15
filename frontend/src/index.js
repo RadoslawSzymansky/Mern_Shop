@@ -6,10 +6,12 @@ import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AboutPage from "./About";
+import GlobalStyle from './globalStyles';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <GlobalStyle/>
       <Router>
         <Switch>
           <Route exact path="/" component={App} />
