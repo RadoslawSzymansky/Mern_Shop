@@ -15,6 +15,9 @@ ReactDOM.render(
           <Route exact path="/" component={App} />
           <Route exact path="/about" component={AboutPage} />
         </Switch>
+          <footer>
+              Stopka
+          </footer>
       </Router>
     </Provider>
   </React.StrictMode>,
