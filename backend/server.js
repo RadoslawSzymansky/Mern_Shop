@@ -1,18 +1,23 @@
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const mongoose = require('mongoose');
 const app = express();
-const apiPort = 3000;
+const cors = require('cors');
 
-
-app.use(bodyParser.urlencoded({ extended: true}))
-app.use(cors())
-app.use(bodyParser.json())
-
-
-app.get('/', (req, res) =>{
-    res.send('Hello World')
+mongoose.connect(process.env.DATABASE_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
+const db = mongoose.connection;
+db.on('error', (err) => console.log(err));
+db.once('open', () => console.log('Database connected!'));
 
-app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
+app.use(express.json());
+app.use(cors());
+
+const usersRouter = require('./routes/users');
+
+app.use('/users', usersRouter);
+
+app.listen(8000, () => console.log('Server started'));
